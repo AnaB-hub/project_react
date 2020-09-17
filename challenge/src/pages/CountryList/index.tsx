@@ -33,19 +33,18 @@ const CountryList: React.FC = () => {
       .then((res) => res.json())
       .then((res) => {
         setCountries(res.data ? res.data.Country : []);
+        setCountriesReserva(res.data ? res.data.Country : []);
       });
   }, []);
 
-  // For testes
   // useEffect(() => {
   //   console.log("countries", countries);
   // }, [countries]);
 
   function searchCountry() {
     if (searchField) {
-      setCountriesReserva(countries);
-      let filtered = countries.filter(
-        (country) => country.name.toUpperCase() === searchField.toUpperCase()
+      let filtered = countries.filter((country) =>
+        country.name.toUpperCase().includes(searchField.toUpperCase())
       );
       setCountries(filtered);
     } else {
