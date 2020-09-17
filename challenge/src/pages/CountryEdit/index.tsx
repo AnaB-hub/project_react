@@ -5,7 +5,7 @@ import { Container } from "./styles";
 const CountryEdit: React.FC = () => {
   return (
     <Container>
-      <h1>Hello edit</h1>
+      <h1>Hello Edit</h1>
     </Container>
   );
 };

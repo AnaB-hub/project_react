@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-import { Container, Search, CoutryCard } from "./styles";
+import { Search, CoutryCard } from "./styles";
+import { Link } from "react-router-dom";
+import { Container } from "../CountryEdit/styles";
 
 // bandeira, nome e capital
 interface Country {
@@ -56,6 +58,10 @@ const CountryList: React.FC = () => {
     setSearchField("");
   }
 
+  function editCountry(name: string) {
+    console.log(name);
+  }
+
   return (
     <>
       <h1>Countries</h1>
@@ -77,12 +83,25 @@ const CountryList: React.FC = () => {
       <Container>
         {countries &&
           countries.map((country) => (
-            // TODO receber atributos separadamente
             <CoutryCard key={country.name}>
               <img src={country.flag.svgFile} alt={country.flag.emoji} />
               <div>
                 <p>Country: {country.name}</p>
                 <p>Capital: {country.capital}</p>
+              </div>
+              <div>
+                <Link
+                  onClick={(_) => editCountry(country.name)}
+                  to={`/details/${country.name}`}
+                >
+                  Details
+                </Link>
+                <Link
+                  onClick={(_) => editCountry(country.name)}
+                  to={`/edit/${country.name}`}
+                >
+                  Edit
+                </Link>
               </div>
             </CoutryCard>
           ))}

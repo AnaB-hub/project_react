@@ -55,4 +55,13 @@ export const CoutryCard = styled.div`
     width: 140px;
     margin: 20px 10px;
   }
+
+  a {
+    text-decoration: none;
+    color: #000;
+
+    & + a {
+      margin-left: 5px;
+    }
+  }
 `;
