@@ -2,6 +2,28 @@ import styled from "styled-components";
 
 export const Container = styled.div``;
 
+export const Search = styled.div`
+  display: flex;
+  align-items: center;
+
+  label,
+  input {
+    font-size: 18px;
+  }
+
+  input {
+    flex: 1;
+    height: 40px;
+    max-width: 522px;
+    margin-left: 5px;
+    border: 0px;
+
+    &::placeholder {
+      color: #666360;
+    }
+  }
+`;
+
 export const CoutryCard = styled.div`
   display: flex;
   align-content: center;

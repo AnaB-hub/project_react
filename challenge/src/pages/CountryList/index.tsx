@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { Container, CoutryCard } from "./styles";
+import { Container, Search, CoutryCard } from "./styles";
 
 // bandeira, nome e capital
 interface Country {
@@ -16,6 +16,8 @@ interface Flag {
 
 const CountryList: React.FC = () => {
   const [countries, setCountries] = useState<Country[]>([]);
+  const [countriesReserva, setCountriesReserva] = useState<Country[]>([]);
+  const [searchField, setSearchField] = useState("");
 
   useEffect(() => {
     fetch("https://countries-274616.ew.r.appspot.com", {
@@ -37,21 +39,55 @@ const CountryList: React.FC = () => {
   //   console.log("countries", countries);
   // }, [countries]);
 
+  function searchCountry() {
+    if (searchField) {
+      setCountriesReserva(countries);
+      let filtered = countries.filter(
+        (country) => country.name.toUpperCase() === searchField.toUpperCase()
+      );
+      setCountries(filtered);
+    } else {
+      // TODO acusar erro e pedir para digitar um valor
+    }
+  }
+
+  function clearSerachField() {
+    setCountries(countriesReserva);
+    setSearchField("");
+  }
+
   return (
-    <Container>
+    <>
       <h1>Countries</h1>
-      {countries &&
-        countries.map((country) => (
-          // TODO receber atributos separadamente
-          <CoutryCard key={country.name}>
-            <img src={country.flag.svgFile} alt={country.flag.emoji} />
-            <div>
-              <p>Country: {country.name}</p>
-              <p>Capital: {country.capital}</p>
-            </div>
-          </CoutryCard>
-        ))}
-    </Container>
+      <Search>
+        <label>Search for a country name: </label>
+        <input
+          type="text"
+          placeholder=" Search for a country name"
+          value={searchField}
+          onChange={(e) => setSearchField(e.target.value)}
+        />
+        <button type="button" onClick={searchCountry}>
+          Search
+        </button>
+        <button type="button" onClick={clearSerachField}>
+          Clear search field
+        </button>
+      </Search>
+      <Container>
+        {countries &&
+          countries.map((country) => (
+            // TODO receber atributos separadamente
+            <CoutryCard key={country.name}>
+              <img src={country.flag.svgFile} alt={country.flag.emoji} />
+              <div>
+                <p>Country: {country.name}</p>
+                <p>Capital: {country.capital}</p>
+              </div>
+            </CoutryCard>
+          ))}
+      </Container>
+    </>
   );
 };
 
