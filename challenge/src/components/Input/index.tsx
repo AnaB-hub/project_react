@@ -1,10 +1,4 @@
-import React, {
-  InputHTMLAttributes,
-  useEffect,
-  useRef,
-  useState,
-  useCallback,
-} from "react";
+import React, { InputHTMLAttributes, useRef } from "react";
 import { IconBaseProps } from "react-icons";
 
 import { Container } from "./styles";

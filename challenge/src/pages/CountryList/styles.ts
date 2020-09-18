@@ -28,9 +28,11 @@ export const CoutryCard = styled.div`
   display: flex;
   align-content: center;
   align-items: center;
+  justify-content: space-around;
 
   background: #fff;
-  max-width: 700px;
+  flex: 1;
+  max-width: 900px;
   transition: transform 0.2s;
   margin: 5px;
 
@@ -59,6 +61,7 @@ export const CoutryCard = styled.div`
   a {
     text-decoration: none;
     color: #000;
+    align-items: flex-end;
 
     & + a {
       margin-left: 5px;
