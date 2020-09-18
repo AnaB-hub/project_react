@@ -11,6 +11,7 @@ const INITIAL_STATE: CountryState = {
 const reducer: Reducer<CountryState> = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case CountriesTypes.LOAD_REQUEST:
+      console.log(action.payload.data);
       return {
         ...state,
         loading: false,
