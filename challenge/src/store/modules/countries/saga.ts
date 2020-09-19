@@ -1,6 +1,6 @@
 import { call, put } from "redux-saga/effects";
 
-import { loadRequest, loadFailure } from "./actions";
+import { loadRequest, editCountry } from "./actions";
 import api from "../../../services/api";
 
 export interface Country {
@@ -45,6 +45,6 @@ export function* load() {
     console.log();
     // yield put(loadRequest(list));
   } catch (error) {
-    yield put(loadFailure());
+    // yield put(editCountry());
   }
 }

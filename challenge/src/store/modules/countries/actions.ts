@@ -5,4 +5,5 @@ import { CountriesTypes, Country } from "./types";
 export const loadRequest = (data: Country[]) =>
   action(CountriesTypes.LOAD_REQUEST, { data });
 
-export const loadFailure = () => action(CountriesTypes.LOAD_FAILURE);
+export const editCountry = (data: Country[]) =>
+  action(CountriesTypes.EDIT_COUNTRY, { data });

@@ -3,7 +3,7 @@
  */
 export enum CountriesTypes {
   LOAD_REQUEST = "@countries/LOAD_REQUEST",
-  LOAD_FAILURE = "@countries/LOAD_FAILURE",
+  EDIT_COUNTRY = "@countries/EDIT_COUNTRY",
 }
 
 /**

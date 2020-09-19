@@ -11,15 +11,19 @@ const INITIAL_STATE: CountryState = {
 const reducer: Reducer<CountryState> = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case CountriesTypes.LOAD_REQUEST:
-      console.log(action.payload.data);
       return {
         ...state,
         loading: false,
         error: false,
         data: action.payload.data,
       };
-    case CountriesTypes.LOAD_FAILURE:
-      return { ...state, loading: false, error: true, data: [] };
+    case CountriesTypes.EDIT_COUNTRY:
+      return {
+        ...state,
+        loading: false,
+        error: true,
+        data: action.payload.data,
+      };
     default:
       return state;
   }

@@ -8,3 +8,5 @@ export const Container = styled.form`
     align-content: center;
   } */
 `;
+
+export const Input = styled.input``;

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { Search, CoutryCard } from "./styles";
 import { Container } from "../CountryEdit/styles";
-import { load } from "../../store/modules/countries/saga";
 import { loadRequest } from "../../store/modules/countries/actions";
 
 // bandeira, nome e capital
@@ -20,6 +19,9 @@ interface Flag {
 }
 
 const CountryList: React.FC = () => {
+  const countriesState = useSelector(
+    (state: RootStateOrAny) => state.countries
+  );
   const dispatch = useDispatch();
 
   const [countries, setCountries] = useState<Country[]>([]);
@@ -27,20 +29,24 @@ const CountryList: React.FC = () => {
   const [searchField, setSearchField] = useState("");
 
   useEffect(() => {
-    fetch("https://countries-274616.ew.r.appspot.com", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        query: `
-        query {\n  Country {\n    name\n    nativeName\n    alpha2Code\n    alpha3Code\n    area\n    population\n    populationDensity\n    capital\n    demonym\n    gini\n    location {\n      latitude\n      longitude\n    }\n    numericCode\n    subregion {\n      name\n      region {\n        name\n      }\n    }\n    officialLanguages {\n      iso639_1\n      iso639_2\n      name\n      nativeName\n    }\n    currencies {\n      name\n      symbol\n    }\n    regionalBlocs {\n      name\n      acronym\n      otherAcronyms {\n        name\n      }\n      otherNames {\n        name\n      }\n    }\n    flag {\n      emoji\n      emojiUnicode\n      svgFile\n    }\n    topLevelDomains {\n      name\n    }\n    callingCodes {\n      name\n    }\n    alternativeSpellings {\n      name\n    }\n  }\n}\n`,
-      }),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        setCountries(res.data ? res.data.Country : []);
-        setCountriesReserva(res.data ? res.data.Country : []);
-        dispatch(loadRequest(res.data.Country));
-      });
+    if (countriesState && countriesState.data.length > 0) {
+      setCountries(countriesState.data);
+    } else {
+      fetch("https://countries-274616.ew.r.appspot.com", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          query: `
+            query {\n  Country {\n    name\n    nativeName\n    alpha2Code\n    alpha3Code\n    area\n    population\n    populationDensity\n    capital\n    demonym\n    gini\n    location {\n      latitude\n      longitude\n    }\n    numericCode\n    subregion {\n      name\n      region {\n        name\n      }\n    }\n    officialLanguages {\n      iso639_1\n      iso639_2\n      name\n      nativeName\n    }\n    currencies {\n      name\n      symbol\n    }\n    regionalBlocs {\n      name\n      acronym\n      otherAcronyms {\n        name\n      }\n      otherNames {\n        name\n      }\n    }\n    flag {\n      emoji\n      emojiUnicode\n      svgFile\n    }\n    topLevelDomains {\n      name\n    }\n    callingCodes {\n      name\n    }\n    alternativeSpellings {\n      name\n    }\n  }\n}\n`,
+        }),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          setCountries(res.data ? res.data.Country : []);
+          setCountriesReserva(res.data ? res.data.Country : []);
+          dispatch(loadRequest(res.data.Country));
+        });
+    }
   }, []);
 
   // useEffect(() => {
