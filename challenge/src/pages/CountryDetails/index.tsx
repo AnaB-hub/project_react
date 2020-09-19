@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { useRouteMatch, Link } from "react-router-dom";
 import { useSelector, RootStateOrAny } from "react-redux";
+import { toast } from "react-toastify";
 
 import { Container } from "./styles";
 import CountryDetailsItens from "../../components/CountryDetailsItens/CountryDetailsItens";
@@ -45,16 +46,12 @@ const CountryDetails: React.FC = () => {
         console.log(selected[0]);
         setCountry(selected[0]);
       } else {
-        // TODO acusar erro
+        toast.error("Country not found");
+        setShowLoad(false);
       }
       console.log(countries.data);
     }
   }, [countries, params]);
-
-  // useEffect(() => {
-  //   console.log(params);
-  //   //pesquisar pelo nome recuperado - redux
-  // }, [params]);
 
   return (
     <>

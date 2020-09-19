@@ -2,6 +2,7 @@ import React, { useState, FormEvent, useEffect } from "react";
 
 import { Link, useRouteMatch } from "react-router-dom";
 import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
+import { toast } from "react-toastify";
 
 import { loadRequest } from "../../store/modules/countries/actions";
 import { Container } from "./styles";
@@ -45,7 +46,8 @@ const CountryEdit: React.FC = () => {
           selected[0].population
         );
       } else {
-        // TODO acusar erro
+        toast.error("Country not found");
+        setShowLoad(false);
       }
       console.log("selected", selected);
       console.log("lista", countries.data);
@@ -68,10 +70,10 @@ const CountryEdit: React.FC = () => {
   function handleSubmit(e: FormEvent): void {
     e.preventDefault();
 
-    // if (handleCheckInputInvalid()) {
-    //   //TODO mensagem de erro para campos
-    //   return;
-    // }
+    if (handleCheckInputInvalid()) {
+      toast.error("The data is not valid");
+      return;
+    }
 
     const index = countries.data.findIndex((country: CountryEdit) => {
       return country.name.toUpperCase() === params.name.toUpperCase();
@@ -88,14 +90,15 @@ const CountryEdit: React.FC = () => {
 
       //SETAR NO REDUX
       dispatch(loadRequest(countries.data));
+      toast.success("Change successfully saved");
     }
   }
 
   function handleCheckInputInvalid() {
     if (!!name && !!capital && !!area && !!population) {
-      return true;
-    } else {
       return false;
+    } else {
+      return true;
     }
   }
 
