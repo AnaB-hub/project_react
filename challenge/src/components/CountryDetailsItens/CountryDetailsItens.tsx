@@ -15,6 +15,7 @@ const CountryDetailsItens: React.FC<DetailsProps> = ({
     <Container>
       <TitleField>{title}: </TitleField>
       <ValueField>{value}</ValueField>
+      <hr></hr>
     </Container>
   );
 };

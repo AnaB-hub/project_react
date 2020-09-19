@@ -2,12 +2,13 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
-  align-items: center;
-  /* align-content: center; */
 
   img {
-    height: 100px;
-    width: 140px;
-    margin: 20px 10px;
+    height: 358px;
+    width: 534px;
+    margin-top: 20px;
+    -webkit-box-shadow: 9px 7px 5px rgba(50, 50, 50, 0.77);
+    -moz-box-shadow: 9px 7px 5px rgba(50, 50, 50, 0.77);
+    box-shadow: 9px 7px 5px rgba(50, 50, 50, 0.77);
   }
 `;
