@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 import { Link } from "react-router-dom";
+import { AiFillEdit } from "react-icons/ai";
+import { BiDetail } from "react-icons/bi";
 
 import { Search, CoutryCard } from "./styles";
 import { Container } from "../CountryEdit/styles";
 import { loadRequest } from "../../store/modules/countries/actions";
 import LoadingComp from "../../components/loading/loading";
+import { toast } from "react-toastify";
 
 // bandeira, nome e capital
 interface Country {
@@ -34,6 +37,7 @@ const CountryList: React.FC = () => {
   useEffect(() => {
     if (countriesState && countriesState.data.length > 0) {
       setCountries(countriesState.data);
+      setCountriesReserva(countriesState.data);
     } else {
       fetch("https://countries-274616.ew.r.appspot.com", {
         method: "POST",
@@ -65,7 +69,7 @@ const CountryList: React.FC = () => {
       );
       setCountries(filtered);
     } else {
-      // TODO acusar erro e pedir para digitar um valor
+      toast.error("Enter a search value");
     }
   }
 
@@ -83,19 +87,23 @@ const CountryList: React.FC = () => {
       <Container>
         <h1>Countries</h1>
         <Search>
-          <label>Search for a country name: </label>
-          <input
-            type="text"
-            placeholder=" Search for a country name"
-            value={searchField}
-            onChange={(e) => setSearchField(e.target.value)}
-          />
-          <button type="button" onClick={searchCountry}>
-            Search
-          </button>
-          <button type="button" onClick={clearSerachField}>
-            Clear search field
-          </button>
+          <div>
+            <label>Search for a country name: </label>
+            <input
+              type="text"
+              placeholder=" Search for a country name"
+              value={searchField}
+              onChange={(e) => setSearchField(e.target.value)}
+            />
+          </div>
+          <div>
+            <button type="button" onClick={searchCountry}>
+              Search
+            </button>
+            <button type="button" onClick={clearSerachField}>
+              Clear search field
+            </button>
+          </div>
         </Search>
 
         {showLoad && <LoadingComp />}
@@ -113,13 +121,13 @@ const CountryList: React.FC = () => {
                   onClick={(_) => editCountry(country.name)}
                   to={`/details/${country.name}`}
                 >
-                  Details
+                  <BiDetail size={30} title="Details" />
                 </Link>
                 <Link
                   onClick={(_) => editCountry(country.name)}
                   to={`/edit/${country.name}`}
                 >
-                  Edit
+                  <AiFillEdit size={30} title="Edit" />
                 </Link>
               </div>
             </CoutryCard>
