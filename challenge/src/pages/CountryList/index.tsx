@@ -50,7 +50,7 @@ const CountryList: React.FC = () => {
           dispatch(loadRequest(res.data.Country));
         });
     }
-  }, []);
+  }, [countriesState, dispatch]);
 
   useEffect(() => {
     if (countries && countries.length > 0) {

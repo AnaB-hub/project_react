@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes, useRef, FormEvent } from "react";
+import React, { InputHTMLAttributes, useRef } from "react";
 import { IconBaseProps } from "react-icons";
 
 import { Container } from "./styles";

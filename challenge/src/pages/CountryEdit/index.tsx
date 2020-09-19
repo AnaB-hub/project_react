@@ -73,15 +73,6 @@ const CountryEdit: React.FC = () => {
     //   return;
     // }
 
-    const data = {
-      name,
-      capital,
-      area,
-      population,
-    };
-
-    console.log("tem obsjet", countries);
-
     const index = countries.data.findIndex((country: CountryEdit) => {
       return country.name.toUpperCase() === params.name.toUpperCase();
     });
