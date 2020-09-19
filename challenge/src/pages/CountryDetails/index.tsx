@@ -6,6 +6,7 @@ import { useSelector, RootStateOrAny } from "react-redux";
 import { Container } from "./styles";
 import CountryDetailsItens from "../../components/CountryDetailsItens/CountryDetailsItens";
 import CountryParams from "../../models/CountryParams";
+import LoadingComp from "../../components/loading/loading";
 
 interface CountryDetail {
   name: string;
@@ -31,6 +32,7 @@ const CountryDetails: React.FC = () => {
   const { params } = useRouteMatch<CountryParams>();
 
   const [country, setCountry] = useState<CountryDetail>();
+  const [showLoad, setShowLoad] = useState(true);
 
   useEffect(() => {
     if (countries) {
@@ -39,6 +41,7 @@ const CountryDetails: React.FC = () => {
         country.name.toUpperCase().includes(nameCountry.toUpperCase())
       );
       if (selected && selected.length >= 1) {
+        setShowLoad(false);
         console.log(selected[0]);
         setCountry(selected[0]);
       } else {
@@ -56,6 +59,7 @@ const CountryDetails: React.FC = () => {
   return (
     <>
       <h1>Details: {params.name}</h1>
+      {showLoad && <LoadingComp />}
       <Container>
         <div>
           {country && (

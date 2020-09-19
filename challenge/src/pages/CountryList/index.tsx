@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Search, CoutryCard } from "./styles";
 import { Container } from "../CountryEdit/styles";
 import { loadRequest } from "../../store/modules/countries/actions";
+import LoadingComp from "../../components/loading/loading";
 
 // bandeira, nome e capital
 interface Country {
@@ -28,6 +29,8 @@ const CountryList: React.FC = () => {
   const [countriesReserva, setCountriesReserva] = useState<Country[]>([]);
   const [searchField, setSearchField] = useState("");
 
+  const [showLoad, setShowLoad] = useState(true);
+
   useEffect(() => {
     if (countriesState && countriesState.data.length > 0) {
       setCountries(countriesState.data);
@@ -49,9 +52,11 @@ const CountryList: React.FC = () => {
     }
   }, []);
 
-  // useEffect(() => {
-  //   console.log("countries", countries);
-  // }, [countries]);
+  useEffect(() => {
+    if (countries && countries.length > 0) {
+      setShowLoad(false);
+    }
+  }, [countries]);
 
   function searchCountry() {
     if (searchField) {
@@ -92,6 +97,9 @@ const CountryList: React.FC = () => {
             Clear search field
           </button>
         </Search>
+
+        {showLoad && <LoadingComp />}
+
         {countries &&
           countries.map((country) => (
             <CoutryCard key={country.name}>

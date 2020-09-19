@@ -7,6 +7,7 @@ import { loadRequest } from "../../store/modules/countries/actions";
 import { Container } from "./styles";
 import CountryParams from "../../models/CountryParams";
 import Input from "../../components/Input";
+import LoadingComp from "../../components/loading/loading";
 
 interface CountryEdit {
   name: string;
@@ -26,6 +27,8 @@ const CountryEdit: React.FC = () => {
   const [capital, setCapital] = useState("");
   const [area, setArea] = useState("");
   const [population, setPopulation] = useState("");
+
+  const [showLoad, setShowLoad] = useState(true);
 
   useEffect(() => {
     if (countries) {
@@ -55,6 +58,7 @@ const CountryEdit: React.FC = () => {
     area: string,
     population: string
   ): void {
+    setShowLoad(false);
     setName(name);
     setCapital(capital);
     setArea(area);
@@ -107,6 +111,7 @@ const CountryEdit: React.FC = () => {
   return (
     <>
       <h1>Edit country: {params.name}</h1>
+      {showLoad && <LoadingComp />}
       <Container onSubmit={handleSubmit}>
         <div>
           <Input
