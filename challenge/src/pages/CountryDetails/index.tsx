@@ -58,6 +58,7 @@ const CountryDetails: React.FC = () => {
     <>
       <h1>Detalhes do país: {params.name}</h1>
       {showLoad && <LoadingComp />}
+      <BackButton />
       <Container>
         <div>
           {country && (
@@ -85,7 +86,6 @@ const CountryDetails: React.FC = () => {
           )}
         </div>
       </Container>
-      <BackButton />
     </>
   );
 };

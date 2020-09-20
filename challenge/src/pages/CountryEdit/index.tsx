@@ -55,7 +55,7 @@ const CountryEdit: React.FC = () => {
           selected[0].flag
         );
       } else {
-        toast.error("Country not found");
+        toast.error("País não encontrado");
         setShowLoad(false);
       }
       console.log("selected", selected);
@@ -82,7 +82,7 @@ const CountryEdit: React.FC = () => {
     e.preventDefault();
 
     if (handleCheckInputInvalid()) {
-      toast.error("The data is not valid");
+      toast.error("Formulário inválido! Preencha todos os campos");
       return;
     }
 
@@ -101,7 +101,8 @@ const CountryEdit: React.FC = () => {
 
       //SETAR NO REDUX
       dispatch(loadRequest(countries.data));
-      toast.success("Change successfully saved");
+      toast.success("Alteração salva com sucesso");
+      return;
     }
   }
 
@@ -118,6 +119,7 @@ const CountryEdit: React.FC = () => {
       <h1>Editar o país: {params.name}</h1>
       {showLoad && <LoadingComp />}
       <Container onSubmit={handleSubmit}>
+        <BackButton />
         <img src={flag} alt={flag} />
         <div>
           <Input
@@ -148,7 +150,6 @@ const CountryEdit: React.FC = () => {
           />
           <button type="submit">Salvar</button>
         </div>
-        <BackButton />
       </Container>
     </>
   );

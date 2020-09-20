@@ -105,7 +105,7 @@ const CountryList: React.FC = () => {
     <>
       <Container>
         <h1>Filter Countries</h1>
-        <Search>
+        <Search onSubmit={searchCountry}>
           <div>
             <label>Pesquise pelo nome de um país: </label>
             <input
@@ -117,11 +117,7 @@ const CountryList: React.FC = () => {
             />
           </div>
           <div>
-            <button
-              type="button"
-              data-testid="searchButton"
-              onClick={searchCountry}
-            >
+            <button type="submit" data-testid="searchButton">
               Pesquisar
             </button>
             <button type="button" onClick={clearSerachField}>
@@ -158,7 +154,7 @@ const CountryList: React.FC = () => {
               </div>
             </CoutryCard>
           ))}
-        {countries && <p>A lista está vazia</p>}
+        {!countries && <p>A lista está vazia</p>}
       </Container>
     </>
   );
