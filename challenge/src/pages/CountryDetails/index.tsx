@@ -8,6 +8,7 @@ import { Container } from "./styles";
 import CountryDetailsItens from "../../components/CountryDetailsItens/CountryDetailsItens";
 import CountryParams from "../../models/CountryParams";
 import LoadingComp from "../../components/loading/loading";
+import BackButton from "../../components/backButton/backButton";
 
 interface CountryDetail {
   name: string;
@@ -82,11 +83,9 @@ const CountryDetails: React.FC = () => {
                 )}
             </>
           )}
-
-          {/* bandeira, nome, capital, área, população e top-level domain */}
         </div>
       </Container>
-      <Link to="">Back</Link>
+      <BackButton />
     </>
   );
 };

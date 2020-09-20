@@ -3,12 +3,14 @@ import React, { useState, FormEvent, useEffect } from "react";
 import { Link, useRouteMatch } from "react-router-dom";
 import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 import { toast } from "react-toastify";
+import { BiArrowBack } from "react-icons/bi";
 
 import { loadRequest } from "../../store/modules/countries/actions";
 import { Container } from "./styles";
 import CountryParams from "../../models/CountryParams";
 import Input from "../../components/Input";
 import LoadingComp from "../../components/loading/loading";
+import BackButton from "../../components/backButton/backButton";
 
 interface CountryEdit {
   name: string;
@@ -136,8 +138,8 @@ const CountryEdit: React.FC = () => {
           />
           <button type="submit">Save changes</button>
         </div>
+        <BackButton />
       </Container>
-      <Link to="/">Back</Link>
     </>
   );
 };

@@ -13,7 +13,6 @@ const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
 
   return (
     <Container>
-      {/* {Icon && <Icon size={20} />} */}
       <label>{name}: </label>
       <input ref={inpuRef} {...rest} />
     </Container>
