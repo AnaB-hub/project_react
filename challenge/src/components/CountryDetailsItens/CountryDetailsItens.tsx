@@ -13,8 +13,8 @@ const CountryDetailsItens: React.FC<DetailsProps> = ({
 }: DetailsProps) => {
   return (
     <Container>
-      <TitleField>{title}: </TitleField>
-      <ValueField>{value}</ValueField>
+      <TitleField data-testid="titleField">{title}: </TitleField>
+      <ValueField data-testid="valueField">{value}</ValueField>
       <hr></hr>
     </Container>
   );

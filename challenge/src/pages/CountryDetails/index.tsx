@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { useRouteMatch, Link } from "react-router-dom";
+import { useRouteMatch } from "react-router-dom";
 import { useSelector, RootStateOrAny } from "react-redux";
 import { toast } from "react-toastify";
 
@@ -47,7 +47,7 @@ const CountryDetails: React.FC = () => {
         console.log(selected[0]);
         setCountry(selected[0]);
       } else {
-        toast.error("Country not found");
+        toast.error("País não encontrado. Volte para a página inicial");
         setShowLoad(false);
       }
       console.log(countries.data);
@@ -56,7 +56,7 @@ const CountryDetails: React.FC = () => {
 
   return (
     <>
-      <h1>Details: {params.name}</h1>
+      <h1>Detalhes do país: {params.name}</h1>
       {showLoad && <LoadingComp />}
       <Container>
         <div>
@@ -68,7 +68,7 @@ const CountryDetails: React.FC = () => {
               <CountryDetailsItens title="Capital" value={country.capital} />
               <CountryDetailsItens title="Area" value={country.area} />
               <CountryDetailsItens
-                title="Population"
+                title="População"
                 value={country.population}
               />
               {country.topLevelDomains &&

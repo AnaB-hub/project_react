@@ -13,8 +13,8 @@ const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
 
   return (
     <Container>
-      <label>{name}: </label>
-      <input ref={inpuRef} {...rest} />
+      <label data-testid="label">{name}: </label>
+      <input data-testid="input" ref={inpuRef} {...rest} />
     </Container>
   );
 };

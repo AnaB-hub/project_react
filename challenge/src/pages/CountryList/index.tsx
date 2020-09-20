@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, FormEvent } from "react";
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 import { Link } from "react-router-dom";
 import { AiFillEdit } from "react-icons/ai";
@@ -62,18 +62,37 @@ const CountryList: React.FC = () => {
     }
   }, [countries]);
 
-  function searchCountry() {
+  // useEffect(() => {
+  //   searchCountryAutoComplete();
+  // }, [searchField]);
+
+  // function searchCountryAutoComplete() {
+  //   let countriesForFilter = countriesReserva;
+  //   if (searchField) {
+  //     let filtered = countriesForFilter.filter((country) =>
+  //       country.name.toUpperCase().includes(searchField.toUpperCase())
+  //     );
+  //     if (filtered) setCountries(filtered);
+  //   } else {
+  //     setCountries(countriesReserva);
+  //   }
+  // }
+
+  function searchCountry(e: FormEvent) {
+    e.preventDefault();
+    let countriesForFilter = countriesReserva;
     if (searchField) {
-      let filtered = countries.filter((country) =>
+      let filtered = countriesForFilter.filter((country) =>
         country.name.toUpperCase().includes(searchField.toUpperCase())
       );
       setCountries(filtered);
     } else {
-      toast.error("Enter a search value");
+      toast.error("Informe um nome ou limpe a consulta");
     }
   }
 
-  function clearSerachField() {
+  function clearSerachField(e: FormEvent) {
+    e.preventDefault();
     setCountries(countriesReserva);
     setSearchField("");
   }
@@ -85,26 +104,33 @@ const CountryList: React.FC = () => {
   return (
     <>
       <Container>
-        <h1>Countries</h1>
+        <h1>Filter Countries</h1>
         <Search>
           <div>
-            <label>Search for a country name: </label>
+            <label>Pesquise pelo nome de um país: </label>
             <input
+              data-testid="search"
               type="text"
-              placeholder=" Search for a country name"
+              placeholder=" Pesquise pelo nome de um país"
               value={searchField}
               onChange={(e) => setSearchField(e.target.value)}
             />
           </div>
           <div>
-            <button type="button" onClick={searchCountry}>
-              Search
+            <button
+              type="button"
+              data-testid="searchButton"
+              onClick={searchCountry}
+            >
+              Pesquisar
             </button>
             <button type="button" onClick={clearSerachField}>
-              Clear search field
+              Limpar
             </button>
           </div>
         </Search>
+
+        <h1>Lista de Países</h1>
 
         {showLoad && <LoadingComp />}
 
@@ -113,7 +139,7 @@ const CountryList: React.FC = () => {
             <CoutryCard key={country.name}>
               <img src={country.flag.svgFile} alt={country.flag.emoji} />
               <div>
-                <p>Country: {country.name}</p>
+                <p>País: {country.name}</p>
                 <p>Capital: {country.capital}</p>
               </div>
               <div>
@@ -121,17 +147,18 @@ const CountryList: React.FC = () => {
                   onClick={(_) => editCountry(country.name)}
                   to={`/details/${country.name}`}
                 >
-                  <BiDetail size={30} title="Details" />
+                  <BiDetail size={30} title="Detalhar" />
                 </Link>
                 <Link
                   onClick={(_) => editCountry(country.name)}
                   to={`/edit/${country.name}`}
                 >
-                  <AiFillEdit size={30} title="Edit" />
+                  <AiFillEdit size={30} title="Editar" />
                 </Link>
               </div>
             </CoutryCard>
           ))}
+        {countries && <p>A lista está vazia</p>}
       </Container>
     </>
   );

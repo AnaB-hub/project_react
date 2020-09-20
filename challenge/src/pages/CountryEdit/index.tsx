@@ -1,9 +1,8 @@
 import React, { useState, FormEvent, useEffect } from "react";
 
-import { Link, useRouteMatch } from "react-router-dom";
+import { useRouteMatch } from "react-router-dom";
 import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 import { toast } from "react-toastify";
-import { BiArrowBack } from "react-icons/bi";
 
 import { loadRequest } from "../../store/modules/countries/actions";
 import { Container } from "./styles";
@@ -17,6 +16,12 @@ interface CountryEdit {
   capital: string;
   area: string;
   population: string;
+  flag: Flag;
+}
+
+interface Flag {
+  svgFile: string;
+  emoji: string;
 }
 
 const CountryEdit: React.FC = () => {
@@ -30,6 +35,7 @@ const CountryEdit: React.FC = () => {
   const [capital, setCapital] = useState("");
   const [area, setArea] = useState("");
   const [population, setPopulation] = useState("");
+  const [flag, setFlag] = useState("");
 
   const [showLoad, setShowLoad] = useState(true);
 
@@ -45,7 +51,8 @@ const CountryEdit: React.FC = () => {
           selected[0].name,
           selected[0].capital,
           selected[0].area,
-          selected[0].population
+          selected[0].population,
+          selected[0].flag
         );
       } else {
         toast.error("Country not found");
@@ -60,13 +67,15 @@ const CountryEdit: React.FC = () => {
     name: string,
     capital: string,
     area: string,
-    population: string
+    population: string,
+    flag: Flag
   ): void {
     setShowLoad(false);
     setName(name);
     setCapital(capital);
     setArea(area);
     setPopulation(population);
+    setFlag(flag.svgFile);
   }
 
   function handleSubmit(e: FormEvent): void {
@@ -106,15 +115,16 @@ const CountryEdit: React.FC = () => {
 
   return (
     <>
-      <h1>Edit country: {params.name}</h1>
+      <h1>Editar o país: {params.name}</h1>
       {showLoad && <LoadingComp />}
       <Container onSubmit={handleSubmit}>
+        <img src={flag} alt={flag} />
         <div>
           <Input
             value={name}
             onChange={(e) => setName(e.target.value)}
-            name="Name"
-            placeholder="Name"
+            name="Nome"
+            placeholder="Nome"
           />
           <Input
             value={capital}
@@ -133,10 +143,10 @@ const CountryEdit: React.FC = () => {
           <Input
             value={population}
             onChange={(e) => setPopulation(e.target.value)}
-            name="Population"
-            placeholder="Population"
+            name="População"
+            placeholder="População"
           />
-          <button type="submit">Save changes</button>
+          <button type="submit">Salvar</button>
         </div>
         <BackButton />
       </Container>

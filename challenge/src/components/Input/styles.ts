@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  display: flex;
+  display: block;
   align-content: space-between;
 
   margin-top: 20px;
@@ -17,5 +17,9 @@ export const Container = styled.div`
     min-width: 200px;
     margin-left: 10px;
     padding: 10px;
+
+    color: #a6a39f;
+    background: #403f3f;
+    border-radius: 8px;
   }
 `;

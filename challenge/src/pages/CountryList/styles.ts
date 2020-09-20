@@ -12,8 +12,8 @@ export const Container = styled.div`
   }
 `;
 
-export const Search = styled.div`
-  background: #c7c3c3;
+export const Search = styled.form`
+  background: #efe5e5;
   flex: 1;
   max-width: 1200px;
   min-width: 500px;
@@ -76,7 +76,7 @@ export const CoutryCard = styled.div`
   align-items: center;
   justify-content: space-around;
 
-  background: #c7c3c3;
+  background: #efe5e5;
   flex: 1;
   max-width: 1200px;
   min-width: 500px;
