@@ -10,6 +10,10 @@ As telas de detalhar e editar, possuem um ícone para voltar a tela inicial do s
 
 As telas estão responsivas.
 
+## Subindo a aplicação
+- Baixe as dependências: yarn install ou npm install;
+- Suba a aplicação yarn start ou npm start
+
 ## TECNOLOGIAS
 
 * Reactjs
